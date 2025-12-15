@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로 일잘러, 좋은 기획안 작성하는 방법</title>
+    <style>
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-4Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-5Medium.ttf') format('truetype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-6SemiBold.ttf') format('truetype');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-7Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-8ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+        }
+        @font-face {
+            font-family: 'Freesentation';
+            src: url('Freesentation-9Black.ttf') format('truetype');
+            font-weight: 900;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --light: #f8f9fa;
+            --p-color: #e74c3c;
+            --s1-color: #3498db;
+            --s2-color: #27ae60;
+            --t-color: #f39c12;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --gradient-2: linear-gradient(135deg, #e94560 0%, #f39c12 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Freesentation', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Slide Container */
+        .slide {
+            min-height: 100vh;
+            padding: 100px 5% 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Title Slide */
+        .title-slide {
+            background: var(--gradient-1);
+            text-align: center;
+            position: relative;
+        }
+
+        .title-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(52, 152, 219, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .title-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .main-title span {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+            margin-bottom: 3rem;
+        }
+
+        .psst-preview {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .psst-item {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .psst-item:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .psst-item.p { background: linear-gradient(135deg, var(--p-color), #c0392b); }
+        .psst-item.s1 { background: linear-gradient(135deg, var(--s1-color), #2980b9); }
+        .psst-item.s2 { background: linear-gradient(135deg, var(--s2-color), #229954); }
+        .psst-item.t { background: linear-gradient(135deg, var(--t-color), #e67e22); }
+
+        .psst-item .letter {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .psst-item .label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(233, 69, 96, 0.3);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(243, 156, 18, 0.1));
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0 20px 20px 0;
+            margin: 2rem 0;
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* PSST Framework Section */
+        .psst-framework {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .psst-framework {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .psst-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .psst-card.p-card { border-color: rgba(231, 76, 60, 0.3); }
+        .psst-card.s1-card { border-color: rgba(52, 152, 219, 0.3); }
+        .psst-card.s2-card { border-color: rgba(39, 174, 96, 0.3); }
+        .psst-card.t-card { border-color: rgba(243, 156, 18, 0.3); }
+
+        .psst-card:hover.p-card { background: rgba(231, 76, 60, 0.1); border-color: var(--p-color); }
+        .psst-card:hover.s1-card { background: rgba(52, 152, 219, 0.1); border-color: var(--s1-color); }
+        .psst-card:hover.s2-card { background: rgba(39, 174, 96, 0.1); border-color: var(--s2-color); }
+        .psst-card:hover.t-card { background: rgba(243, 156, 18, 0.1); border-color: var(--t-color); }
+
+        .psst-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .psst-letter {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .psst-letter.p { background: var(--p-color); }
+        .psst-letter.s1 { background: var(--s1-color); }
+        .psst-letter.s2 { background: var(--s2-color); }
+        .psst-letter.t { background: var(--t-color); }
+
+        .psst-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .psst-card-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .psst-questions {
+            list-style: none;
+        }
+
+        .psst-questions li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .psst-questions li:last-child {
+            border-bottom: none;
+        }
+
+        .psst-questions li::before {
+            content: '?';
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Example Case */
+        .example-case {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .example-header {
+            background: var(--gradient-2);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .example-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .example-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .example-content {
+            padding: 2rem;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.2rem;
+        }
+
+        .example-item-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-item-label.p { color: var(--p-color); }
+        .example-item-label.s1 { color: var(--s1-color); }
+        .example-item-label.s2 { color: var(--s2-color); }
+        .example-item-label.t { color: var(--t-color); }
+
+        .example-item-text {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+
+        /* Comparison Table */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-box {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .comparison-box.bad {
+            border: 2px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .comparison-box.good {
+            border: 2px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .comparison-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .comparison-box.bad .comparison-label {
+            background: var(--p-color);
+        }
+
+        .comparison-box.good .comparison-label {
+            background: var(--s2-color);
+        }
+
+        .comparison-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.5rem;
+        }
+
+        /* Mistake Cards */
+        .mistake-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .mistake-header {
+            background: rgba(231, 76, 60, 0.2);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mistake-number {
+            width: 40px;
+            height: 40px;
+            background: var(--p-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .mistake-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .mistake-body {
+            padding: 1.5rem;
+        }
+
+        .mistake-solution {
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 3px solid var(--s2-color);
+            padding: 1rem 1.2rem;
+            border-radius: 0 10px 10px 0;
+            margin-top: 1rem;
+        }
+
+        .mistake-solution-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--s2-color);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Tips List */
+        .tips-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .tips-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tips-list li:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateX(10px);
+        }
+
+        .tip-number {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: var(--gradient-2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .tip-content h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .tip-content p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Worksheet Preview */
+        .worksheet-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            color: #1a1a2e;
+            margin-top: 2rem;
+        }
+
+        .worksheet-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .worksheet-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .worksheet-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .worksheet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .worksheet-cell {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1rem;
+            min-height: 150px;
+        }
+
+        .worksheet-cell.p { border-color: var(--p-color); background: rgba(231, 76, 60, 0.05); }
+        .worksheet-cell.s1 { border-color: var(--s1-color); background: rgba(52, 152, 219, 0.05); }
+        .worksheet-cell.s2 { border-color: var(--s2-color); background: rgba(39, 174, 96, 0.05); }
+        .worksheet-cell.t { border-color: var(--t-color); background: rgba(243, 156, 18, 0.05); }
+
+        .worksheet-cell-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .worksheet-cell-title span {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .worksheet-cell.p .worksheet-cell-title span { background: var(--p-color); }
+        .worksheet-cell.s1 .worksheet-cell-title span { background: var(--s1-color); }
+        .worksheet-cell.s2 .worksheet-cell-title span { background: var(--s2-color); }
+        .worksheet-cell.t .worksheet-cell-title span { background: var(--t-color); }
+
+        .worksheet-lines {
+            border-bottom: 1px dashed #ccc;
+            height: 30px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--p-color), var(--s1-color), var(--s2-color), var(--t-color));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .timeline-time {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Activity Section */
+        .activity-box {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.15), rgba(243, 156, 18, 0.15));
+            border: 2px dashed var(--accent);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .activity-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .activity-desc {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .activity-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .activity-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            min-width: 200px;
+        }
+
+        .activity-step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin: 0 auto 1rem;
+        }
+
+        /* Key Points */
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .key-point {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .key-point:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .key-point-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-point-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-point-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* End Slide */
+        .end-slide {
+            text-align: center;
+            background: var(--gradient-1);
+            position: relative;
+        }
+
+        .end-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(233, 69, 96, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(243, 156, 18, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .end-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+        }
+
+        .end-message {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .end-cta {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .end-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        /* Scroll Progress */
+        .progress-bar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+
+        /* Slide Indicator */
+        .slide-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot:hover,
+        .indicator-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 768px) {
+            .slide-indicator {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .nav {
+                justify-content: center;
+            }
+        }
+
+        /* Highlight text */
+        .highlight {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.3), rgba(243, 156, 18, 0.3));
+            padding: 0.1rem 0.5rem;
+            border-radius: 5px;
+        }
+
+        /* Stat boxes */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.3rem;
+        }
+
+        /* Flow diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+        }
+
+        .flow-item {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .flow-item.p { background: var(--p-color); }
+        .flow-item.s1 { background: var(--s1-color); }
+        .flow-item.s2 { background: var(--s2-color); }
+        .flow-item.t { background: var(--t-color); }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col-text h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .col-text p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">PSST Framework</div>
+        <div class="nav-links">
+            <a href="#intro" class="nav-link">도입</a>
+            <a href="#why" class="nav-link">Why</a>
+            <a href="#psst" class="nav-link">PSST</a>
+            <a href="#examples" class="nav-link">예시</a>
+            <a href="#tips" class="nav-link">팁</a>
+            <a href="#mistakes" class="nav-link">실수</a>
+            <a href="#worksheet" class="nav-link">워크시트</a>
+            <a href="#activity" class="nav-link">실습</a>
+            <a href="#end" class="nav-link">마무리</a>
+        </div>
+    </nav>
+
+    <!-- Slide Indicator -->
+    <div class="slide-indicator">
+        <div class="indicator-dot" data-slide="intro"></div>
+        <div class="indicator-dot" data-slide="why"></div>
+        <div class="indicator-dot" data-slide="success"></div>
+        <div class="indicator-dot" data-slide="compare"></div>
+        <div class="indicator-dot" data-slide="psst"></div>
+        <div class="indicator-dot" data-slide="psst-detail"></div>
+        <div class="indicator-dot" data-slide="examples"></div>
+        <div class="indicator-dot" data-slide="example1"></div>
+        <div class="indicator-dot" data-slide="example2"></div>
+        <div class="indicator-dot" data-slide="example3"></div>
+        <div class="indicator-dot" data-slide="tips"></div>
+        <div class="indicator-dot" data-slide="mistakes"></div>
+        <div class="indicator-dot" data-slide="worksheet"></div>
+        <div class="indicator-dot" data-slide="worksheet-ex1"></div>
+        <div class="indicator-dot" data-slide="worksheet-ex2"></div>
+        <div class="indicator-dot" data-slide="activity"></div>
+        <div class="indicator-dot" data-slide="summary"></div>
+        <div class="indicator-dot" data-slide="end"></div>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <section class="slide title-slide" id="intro">
+        <div class="slide-content">
+            <div class="title-badge">2시간 완성 실무 강의</div>
+            <h1 class="main-title">프로 일잘러,<br><span>좋은 기획안</span> 작성하는 방법</h1>
+            <p class="subtitle">PSST 프레임워크로 배우는 설득력 있는 기획안의 비밀</p>
+            <div class="psst-preview">
+                <div class="psst-item p">
+                    <span class="letter">P</span>
+                    <span class="label">Problem</span>
+                </div>
+                <div class="psst-item s1">
+                    <span class="letter">S</span>
+                    <span class="label">Solution</span>
+                </div>
+                <div class="psst-item s2">
+                    <span class="letter">S</span>
+                    <span class="label">Strategy</span>
+                </div>
+                <div class="psst-item t">
+                    <span class="letter">T</span>
+                    <span class="label">Timeline</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Why Planning Matters -->
+    <section class="slide" id="why">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 01</div>
+                <h2 class="section-title">왜 기획안이 중요할까요?</h2>
+                <p class="section-subtitle">기획안은 단순한 문서가 아닙니다. 당신의 생각을 실현시키는 설계도입니다.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3 class="card-title">취업의 무기</h3>
+                    <p class="card-text">면접에서 "기획안 작성해본 경험 있으신가요?"라는 질문에 자신 있게 답할 수 있습니다. 과제 전형에서도 빛을 발합니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">업무의 핵심</h3>
+                    <p class="card-text">신입사원의 첫 업무는 대부분 기획안 작성입니다. 기획력은 모든 직무의 기본이자 경쟁력입니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💡</div>
+                    <h3 class="card-title">생각의 정리</h3>
+                    <p class="card-text">머릿속 아이디어를 체계적으로 정리하고, 다른 사람을 설득할 수 있는 논리적 사고력을 기릅니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">실행의 시작</h3>
+                    <p class="card-text">좋은 기획안은 그 자체로 실행 로드맵이 됩니다. 기획이 탄탄하면 실행도 순조롭습니다.</p>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">기획력을 중시하는 기업</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3배</div>
+                    <div class="stat-label">승진 속도 차이</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-label">실패 프로젝트의 기획 부재</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Success Story -->
+    <section class="slide" id="success">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Success Story</div>
+                <h2 class="section-title">기획안 하나로 합격한 이야기</h2>
+                <p class="section-subtitle">실제 사례로 보는 기획안의 힘</p>
+            </div>
+
+            <div class="example-case">
+                <div class="example-header">
+                    <span class="example-badge">실제 사례</span>
+                    <span class="example-title">김OO (27세) - 마케팅 직무 최종 합격</span>
+                </div>
+                <div class="example-content">
+                    <div class="two-col">
+                        <div class="col-text">
+                            <h3>비전공자의 역전 드라마</h3>
+                            <p>김OO씨는 비전공자로 서류에서 번번이 탈락했습니다. 하지만 지원 기업의 <span class="highlight">실제 문제를 분석한 기획안</span>을 포트폴리오로 제출하며 면접 기회를 얻었고, 최종 합격했습니다.</p>
+                            <p><strong>핵심 차별점:</strong> 앱스토어 리뷰 500건을 직접 분석하여 문제를 객관적으로 입증했습니다.</p>
+                        </div>
+                        <div>
+                            <div class="quote-box">
+                                <p class="quote-text">"지원자가 우리 회사에 관심이 있다는 게 기획안에서 느껴졌습니다. 앱 리뷰를 직접 분석했다는 점에서 실행력과 열정을 확인할 수 있었고, 바로 업무에 투입할 수 있겠다는 확신이 들었습니다."</p>
+                                <p class="quote-author">- 면접관 피드백</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-grid">
+                        <div class="example-item">
+                            <div class="example-item-label p">P. 문제 정의</div>
+                            <div class="example-item-text">앱 리뷰 분석 결과, 2030 고객의 멤버십 불만 언급 32% 증가. 경쟁사 대비 혜택 체감도 부족</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-item-label s1">S. 해결책</div>
+                            <div class="example-item-text">게이미피케이션 기반 챌린지형 멤버십 도입. MAU 15% 증가, 재구매율 20% 상승 목표</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-item-label s2">S. 전략</div>
+                            <div class="example-item-text">주간 챌린지 미션 3종 기획, 레벨업 시스템, 한정판 굿즈 리워드로 희소성 부여</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-item-label t">T. 타임라인</div>
+                            <div class="example-item-text">6주 완료 계획: 기획(1-2주) → 개발(3-4주) → 테스트 및 런칭(5-6주)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Good vs Bad -->
+    <section class="slide" id="compare">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Before & After</div>
+                <h2 class="section-title">좋은 기획안 vs 부족한 기획안</h2>
+                <p class="section-subtitle">같은 주제, 완전히 다른 결과</p>
+            </div>
+
+            <div class="comparison">
+                <div class="comparison-box bad">
+                    <span class="comparison-label">BEFORE</span>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0.5rem;">부족한 기획안</h4>
+                    <p class="comparison-text">
+                        "요즘 MZ세대가 숏폼을 좋아하는 것 같습니다. 그래서 틱톡 마케팅을 하면 효과가 있을 것 같습니다. SNS를 열심히 하면 매출이 오를 것입니다."
+                    </p>
+                    <ul style="margin-top: 1rem; margin-left: 1.2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                        <li>근거 없는 추측</li>
+                        <li>구체적 수치 부재</li>
+                        <li>실행 계획 없음</li>
+                        <li>측정 불가능한 목표</li>
+                    </ul>
+                </div>
+                <div class="comparison-box good">
+                    <span class="comparison-label">AFTER</span>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0.5rem;">좋은 기획안</h4>
+                    <p class="comparison-text">
+                        "2024 미디어 트렌드 보고서에 따르면 MZ세대의 87%가 하루 1회 이상 숏폼을 시청합니다. 틱톡, 릴스, 쇼츠 3개 플랫폼에 주 3회 발행으로 3개월 내 MZ세대 팔로워 비율을 18%에서 35%로 상승시킵니다."
+                    </p>
+                    <ul style="margin-top: 1rem; margin-left: 1.2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+                        <li>데이터 기반 근거</li>
+                        <li>구체적인 수치 목표</li>
+                        <li>명확한 실행 방법</li>
+                        <li>측정 가능한 KPI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 2rem;">
+                <p class="quote-text">핵심 차이: <span class="highlight">문제 → 근거 → 해결책 → 실행 → 측정</span>의 논리적 흐름</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: PSST Framework Intro -->
+    <section class="slide" id="psst">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 02</div>
+                <h2 class="section-title">PSST 프레임워크</h2>
+                <p class="section-subtitle">기획안의 핵심 4요소를 마스터하세요</p>
+            </div>
+
+            <div class="flow-diagram">
+                <div class="flow-item p">Problem<br><small>문제 정의</small></div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item s1">Solution<br><small>해결책</small></div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item s2">Strategy<br><small>실행 전략</small></div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item t">Timeline<br><small>일정 계획</small></div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon" style="background: var(--p-color);">P</div>
+                    <h3 class="card-title">Problem - 문제 정의</h3>
+                    <p class="card-text">"왜 이것이 문제인가?"를 명확히 합니다. 현재 상황과 문제점, 그리고 이를 뒷받침하는 데이터를 제시합니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: var(--s1-color);">S</div>
+                    <h3 class="card-title">Solution - 해결책</h3>
+                    <p class="card-text">"무엇을 할 것인가?"를 제안합니다. 왜 이 방법이 최선인지, 기대되는 결과는 무엇인지 설명합니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: var(--s2-color);">S</div>
+                    <h3 class="card-title">Strategy - 실행 전략</h3>
+                    <p class="card-text">"어떻게 실행할 것인가?"를 구체화합니다. 핵심 과제, 필요 자원, 예상 리스크와 대응 방안을 명시합니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: var(--t-color);">T</div>
+                    <h3 class="card-title">Timeline - 일정 계획</h3>
+                    <p class="card-text">"언제까지 완료할 것인가?"를 계획합니다. 단계별 마일스톤과 최종 완료일을 설정합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: PSST Detail -->
+    <section class="slide" id="psst-detail">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Deep Dive</div>
+                <h2 class="section-title">PSST 각 요소 상세 가이드</h2>
+            </div>
+
+            <div class="psst-framework">
+                <div class="psst-card p-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter p">P</div>
+                        <div>
+                            <div class="psst-card-title">Problem</div>
+                            <div class="psst-card-subtitle">문제 정의의 기술</div>
+                        </div>
+                    </div>
+                    <ul class="psst-questions">
+                        <li>현재 상황은 무엇인가?</li>
+                        <li>왜 이것이 문제인가?</li>
+                        <li>문제의 근거(데이터/사례)는?</li>
+                        <li>이 문제를 방치하면 어떻게 되는가?</li>
+                    </ul>
+                </div>
+
+                <div class="psst-card s1-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s1">S</div>
+                        <div>
+                            <div class="psst-card-title">Solution</div>
+                            <div class="psst-card-subtitle">해결책 제시</div>
+                        </div>
+                    </div>
+                    <ul class="psst-questions">
+                        <li>무엇을 제안하는가?</li>
+                        <li>왜 이 방법이 최선인가?</li>
+                        <li>기대되는 결과는 무엇인가?</li>
+                        <li>다른 대안과 비교하면?</li>
+                    </ul>
+                </div>
+
+                <div class="psst-card s2-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s2">S</div>
+                        <div>
+                            <div class="psst-card-title">Strategy</div>
+                            <div class="psst-card-subtitle">실행 전략 수립</div>
+                        </div>
+                    </div>
+                    <ul class="psst-questions">
+                        <li>핵심 실행 과제 3가지는?</li>
+                        <li>필요한 자원/예산은?</li>
+                        <li>예상 리스크와 대응 방안은?</li>
+                        <li>담당자/협력 부서는?</li>
+                    </ul>
+                </div>
+
+                <div class="psst-card t-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter t">T</div>
+                        <div>
+                            <div class="psst-card-title">Timeline</div>
+                            <div class="psst-card-subtitle">일정 계획</div>
+                        </div>
+                    </div>
+                    <ul class="psst-questions">
+                        <li>단계별 일정은 어떻게 되는가?</li>
+                        <li>각 단계의 완료 기준은?</li>
+                        <li>최종 완료일은 언제인가?</li>
+                        <li>성공 지표(KPI)는 무엇인가?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Examples Intro -->
+    <section class="slide" id="examples">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 03</div>
+                <h2 class="section-title">실전 기획안 예시 3종</h2>
+                <p class="section-subtitle">다양한 상황에서 PSST를 적용하는 방법</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card" style="cursor: pointer;" onclick="document.getElementById('example1').scrollIntoView({behavior: 'smooth'})">
+                    <div class="card-icon">💬</div>
+                    <h3 class="card-title">예시 1: 사내 커뮤니케이션 개선</h3>
+                    <p class="card-text">인사/총무 직무 지원 또는 신입사원 업무 개선 제안 시 활용</p>
+                    <p style="color: var(--accent); margin-top: 1rem; font-weight: 600;">자세히 보기 →</p>
+                </div>
+                <div class="card" style="cursor: pointer;" onclick="document.getElementById('example2').scrollIntoView({behavior: 'smooth'})">
+                    <div class="card-icon">🤖</div>
+                    <h3 class="card-title">예시 2: 고객 서비스 개선</h3>
+                    <p class="card-text">CS/CX 직무 지원 또는 서비스 품질 개선 제안 시 활용</p>
+                    <p style="color: var(--accent); margin-top: 1rem; font-weight: 600;">자세히 보기 →</p>
+                </div>
+                <div class="card" style="cursor: pointer;" onclick="document.getElementById('example3').scrollIntoView({behavior: 'smooth'})">
+                    <div class="card-icon">📱</div>
+                    <h3 class="card-title">예시 3: 콘텐츠 마케팅</h3>
+                    <p class="card-text">마케팅/홍보 직무 지원 또는 브랜드 인지도 제고 시 활용</p>
+                    <p style="color: var(--accent); margin-top: 1rem; font-weight: 600;">자세히 보기 →</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Example 1 -->
+    <section class="slide" id="example1">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Example 01</div>
+                <h2 class="section-title">사내 커뮤니케이션 개선 기획안</h2>
+                <p class="section-subtitle">부서 간 협업 효율 30% 향상을 위한 주간 스탠드업 미팅 도입 제안</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text" style="font-style: normal; font-size: 1rem;">
+                    <strong>한 줄 요약:</strong> 매주 15분 스탠드업 미팅으로 부서 간 정보 단절을 해소하고 프로젝트 지연을 예방한다
+                </p>
+            </div>
+
+            <div class="psst-framework" style="margin-top: 1.5rem;">
+                <div class="psst-card p-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter p">P</div>
+                        <div class="psst-card-title">문제 정의</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>현황:</strong> 지난 분기 프로젝트 중 67%가 일정 지연 발생<br>
+                        <strong>문제점:</strong> 이메일과 메신저로 파편화된 소통, 담당자 부재 시 업무 공백<br>
+                        <strong>근거:</strong> 직원 설문 결과 78%가 타 부서 업무 진행 상황 파악 어려움 응답
+                    </p>
+                </div>
+
+                <div class="psst-card s1-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s1">S</div>
+                        <div class="psst-card-title">해결책</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>제안:</strong> 매주 월요일 오전 9시, 15분 스탠드업 미팅 정례화<br>
+                        <strong>차별점:</strong> 긴 회의 대신 핵심만 공유, 서서 진행하여 집중도 향상<br>
+                        <strong>기대효과:</strong> 정보 단절 해소, 프로젝트 지연율 30% 감소
+                    </p>
+                </div>
+
+                <div class="psst-card s2-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s2">S</div>
+                        <div class="psst-card-title">실행 전략</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>핵심 과제:</strong><br>
+                        1. 스탠드업 미팅 가이드라인 수립<br>
+                        2. 공유 템플릿 제작 (3가지 질문 포맷)<br>
+                        3. 파일럿 운영 및 피드백 수렴<br>
+                        <strong>필요 자원:</strong> 회의실 1개, 화이트보드, 타이머 앱
+                    </p>
+                </div>
+
+                <div class="psst-card t-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter t">T</div>
+                        <div class="psst-card-title">타임라인</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>1주차:</strong> 가이드라인 및 템플릿 제작<br>
+                        <strong>2-3주차:</strong> 1개 팀 파일럿 운영<br>
+                        <strong>4주차:</strong> 피드백 반영 및 개선<br>
+                        <strong>5주차 이후:</strong> 전사 확대 적용<br>
+                        <strong>성공 지표:</strong> 프로젝트 지연율 30% 감소, 직원 만족도 80% 이상
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Example 2 -->
+    <section class="slide" id="example2">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Example 02</div>
+                <h2 class="section-title">고객 서비스 개선 기획안</h2>
+                <p class="section-subtitle">고객 문의 응대 시간 50% 단축을 위한 FAQ 챗봇 도입 제안</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text" style="font-style: normal; font-size: 1rem;">
+                    <strong>한 줄 요약:</strong> 반복 문의 70%를 AI 챗봇이 자동 응대하여 상담원은 복잡한 문의에 집중하게 한다
+                </p>
+            </div>
+
+            <div class="psst-framework" style="margin-top: 1.5rem;">
+                <div class="psst-card p-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter p">P</div>
+                        <div class="psst-card-title">문제 정의</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>현황:</strong> 월평균 고객 문의 3,000건 중 2,100건(70%)이 배송 조회, 반품 절차 등 단순 반복 문의<br>
+                        <strong>문제점:</strong> 평균 응대 대기 시간 8분, 고객 불만 증가 및 상담원 피로도 가중<br>
+                        <strong>근거:</strong> 지난 3개월 VOC 분석 결과, 대기 시간 불만 45% 차지
+                    </p>
+                </div>
+
+                <div class="psst-card s1-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s1">S</div>
+                        <div class="psst-card-title">해결책</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>제안:</strong> FAQ 기반 AI 챗봇 도입으로 단순 문의 자동 응대<br>
+                        <strong>차별점:</strong> 24시간 즉시 응대, 복잡한 문의는 상담원 연결로 하이브리드 운영<br>
+                        <strong>기대효과:</strong> 응대 대기 시간 50% 단축, 상담원 업무 부담 40% 경감
+                    </p>
+                </div>
+
+                <div class="psst-card s2-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s2">S</div>
+                        <div class="psst-card-title">실행 전략</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>핵심 과제:</strong><br>
+                        1. 상위 50개 FAQ 시나리오 작성<br>
+                        2. 챗봇 솔루션 비교 및 선정<br>
+                        3. 상담원 연계 프로세스 설계<br>
+                        <strong>예산:</strong> 초기 구축비 500만원, 월 운영비 50만원
+                    </p>
+                </div>
+
+                <div class="psst-card t-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter t">T</div>
+                        <div class="psst-card-title">타임라인</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>1-2주차:</strong> FAQ 분석 및 시나리오 작성<br>
+                        <strong>3-4주차:</strong> 솔루션 선정 및 개발<br>
+                        <strong>5-6주차:</strong> 테스트 및 상담원 교육<br>
+                        <strong>7주차:</strong> 정식 런칭<br>
+                        <strong>성공 지표:</strong> 대기 시간 4분 이하, 챗봇 해결률 65% 이상
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Example 3 -->
+    <section class="slide" id="example3">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Example 03</div>
+                <h2 class="section-title">콘텐츠 마케팅 기획안</h2>
+                <p class="section-subtitle">MZ세대 브랜드 인지도 200% 향상을 위한 숏폼 콘텐츠 전략</p>
+            </div>
+
+            <div class="quote-box">
+                <p class="quote-text" style="font-style: normal; font-size: 1rem;">
+                    <strong>한 줄 요약:</strong> 틱톡, 릴스, 쇼츠 3개 플랫폼에 주 3회 숏폼 콘텐츠를 발행하여 MZ세대 도달률을 높인다
+                </p>
+            </div>
+
+            <div class="psst-framework" style="margin-top: 1.5rem;">
+                <div class="psst-card p-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter p">P</div>
+                        <div class="psst-card-title">문제 정의</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>현황:</strong> 자사 SNS 팔로워 중 MZ세대 비율 18%로 경쟁사(42%) 대비 현저히 낮음<br>
+                        <strong>문제점:</strong> 기존 콘텐츠가 이미지 위주로 MZ세대 선호 포맷(숏폼)과 불일치<br>
+                        <strong>근거:</strong> 2024 미디어 트렌드 리포트 - MZ세대 87%가 숏폼 콘텐츠 선호
+                    </p>
+                </div>
+
+                <div class="psst-card s1-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s1">S</div>
+                        <div class="psst-card-title">해결책</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>제안:</strong> 틱톡, 인스타 릴스, 유튜브 쇼츠에 15-30초 숏폼 콘텐츠 정기 발행<br>
+                        <strong>차별점:</strong> 트렌드 밈 활용 + 제품 자연스러운 노출로 광고 거부감 최소화<br>
+                        <strong>기대효과:</strong> 3개월 내 MZ세대 팔로워 비율 35%까지 상승
+                    </p>
+                </div>
+
+                <div class="psst-card s2-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter s2">S</div>
+                        <div class="psst-card-title">실행 전략</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>핵심 과제:</strong><br>
+                        1. 콘텐츠 카테고리 3종 기획 (비하인드, 챌린지, 꿀팁)<br>
+                        2. 촬영/편집 워크플로우 구축<br>
+                        3. 성과 분석 대시보드 세팅<br>
+                        <strong>예산:</strong> 월 200만원 (촬영 장비 + 편집 툴 + 광고비)
+                    </p>
+                </div>
+
+                <div class="psst-card t-card">
+                    <div class="psst-card-header">
+                        <div class="psst-letter t">T</div>
+                        <div class="psst-card-title">타임라인</div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.8;">
+                        <strong>1주차:</strong> 콘텐츠 기획 및 촬영 준비<br>
+                        <strong>2주차:</strong> 파일럿 콘텐츠 3개 제작 및 발행<br>
+                        <strong>3-4주차:</strong> 반응 분석 및 최적화<br>
+                        <strong>5주차 이후:</strong> 주 3회 정기 발행 체계화<br>
+                        <strong>성공 지표:</strong> 영상당 평균 조회수 1만회, 팔로워 증가율 월 15%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Tips -->
+    <section class="slide" id="tips">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 04</div>
+                <h2 class="section-title">기획안 작성 실전 팁</h2>
+                <p class="section-subtitle">현업에서 바로 쓰는 프로의 노하우</p>
+            </div>
+
+            <ul class="tips-list">
+                <li>
+                    <span class="tip-number">1</span>
+                    <div class="tip-content">
+                        <h4>한 문장으로 핵심 요약하기</h4>
+                        <p>기획안 맨 앞에 "이 기획안은 OOO을 통해 OOO을 달성한다"는 한 줄 요약을 넣으세요. 바쁜 의사결정자도 핵심을 즉시 파악할 수 있습니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="tip-number">2</span>
+                    <div class="tip-content">
+                        <h4>숫자와 데이터로 설득력 높이기</h4>
+                        <p>"많이 증가했다" 대신 "32% 증가했다"처럼 구체적인 수치를 사용하세요. 출처까지 밝히면 신뢰도가 더욱 높아집니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="tip-number">3</span>
+                    <div class="tip-content">
+                        <h4>예상 반론에 미리 답하기</h4>
+                        <p>"이게 왜 필요해?", "예산은?", "리스크는?" 같은 질문을 예상하고, 기획안에 미리 답변을 포함하세요.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="tip-number">4</span>
+                    <div class="tip-content">
+                        <h4>시각적 구성과 가독성 확보</h4>
+                        <p>중요한 내용은 볼드체, 핵심 수치는 강조 색상으로 표시하세요. 한 페이지에 한 가지 메시지만 담는 것도 좋은 방법입니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="tip-number">5</span>
+                    <div class="tip-content">
+                        <h4>SMART 목표 설정하기</h4>
+                        <p>Specific(구체적), Measurable(측정가능), Achievable(달성가능), Relevant(관련성), Time-bound(기한). 목표는 반드시 이 원칙을 따르세요.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 12: Common Mistakes -->
+    <section class="slide" id="mistakes">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Warning</div>
+                <h2 class="section-title">신입사원이 자주 하는 실수 5가지</h2>
+                <p class="section-subtitle">이것만 피해도 상위 20%</p>
+            </div>
+
+            <div class="mistake-card">
+                <div class="mistake-header">
+                    <span class="mistake-number">1</span>
+                    <span class="mistake-title">문제 정의 없이 바로 해결책 제시</span>
+                </div>
+                <div class="mistake-body">
+                    <div class="comparison" style="gap: 1rem;">
+                        <div class="comparison-box bad" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">BAD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"동호회 지원금을 늘렸으면 좋겠습니다."</p>
+                        </div>
+                        <div class="comparison-box good" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">GOOD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"동호회 참여율 12%로 조직문화 만족도 하위 1위. 지원금 50% 인상으로 참여율 30% 목표"</p>
+                        </div>
+                    </div>
+                    <div class="mistake-solution">
+                        <div class="mistake-solution-label">해결법</div>
+                        <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">첫 문단에서 "현재 상황 → 문제점 → 근거 데이터"를 반드시 명시하세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mistake-card">
+                <div class="mistake-header">
+                    <span class="mistake-number">2</span>
+                    <span class="mistake-title">근거 없는 주장 나열</span>
+                </div>
+                <div class="mistake-body">
+                    <div class="comparison" style="gap: 1rem;">
+                        <div class="comparison-box bad" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">BAD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"MZ세대가 숏폼을 좋아할 것 같습니다."</p>
+                        </div>
+                        <div class="comparison-box good" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">GOOD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"2024 미디어 보고서에 따르면 MZ세대 87%가 하루 1회 이상 숏폼 시청"</p>
+                        </div>
+                    </div>
+                    <div class="mistake-solution">
+                        <div class="mistake-solution-label">해결법</div>
+                        <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">모든 주장에는 "숫자 + 출처"를 붙이세요. 직접 조사한 데이터도 훌륭한 근거입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mistake-card">
+                <div class="mistake-header">
+                    <span class="mistake-number">3</span>
+                    <span class="mistake-title">측정 불가능한 목표 설정</span>
+                </div>
+                <div class="mistake-body">
+                    <div class="comparison" style="gap: 1rem;">
+                        <div class="comparison-box bad" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">BAD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"브랜드 로열티를 강화하겠습니다."</p>
+                        </div>
+                        <div class="comparison-box good" style="padding: 1rem;">
+                            <span class="comparison-label" style="font-size: 0.7rem;">GOOD</span>
+                            <p class="comparison-text" style="font-size: 0.9rem; margin-top: 0.8rem;">"NPS 점수 32점→45점, 재구매율 25%→35%로 상승"</p>
+                        </div>
+                    </div>
+                    <div class="mistake-solution">
+                        <div class="mistake-solution-label">해결법</div>
+                        <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">SMART 원칙: "무엇을, 얼마나, 언제까지" 형식으로 목표를 작성하세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <div class="mistake-card" style="margin: 0;">
+                    <div class="mistake-header" style="padding: 1rem;">
+                        <span class="mistake-number" style="width: 32px; height: 32px; font-size: 0.9rem;">4</span>
+                        <span class="mistake-title" style="font-size: 0.95rem;">실행 계획 없는 아이디어</span>
+                    </div>
+                    <div class="mistake-body" style="padding: 1rem;">
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">담당자 + 일정 + 자원을 명시하세요</p>
+                    </div>
+                </div>
+                <div class="mistake-card" style="margin: 0;">
+                    <div class="mistake-header" style="padding: 1rem;">
+                        <span class="mistake-number" style="width: 32px; height: 32px; font-size: 0.9rem;">5</span>
+                        <span class="mistake-title" style="font-size: 0.95rem;">예상 반론 준비 부족</span>
+                    </div>
+                    <div class="mistake-body" style="padding: 1rem;">
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">리스크 3가지 + 대응방안 준비</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 13: Worksheet Intro -->
+    <section class="slide" id="worksheet">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 05</div>
+                <h2 class="section-title">PSST 기획 캔버스 워크시트</h2>
+                <p class="section-subtitle">한 장으로 완성하는 기획안 템플릿</p>
+            </div>
+
+            <div class="two-col">
+                <div class="col-text">
+                    <h3>왜 워크시트인가?</h3>
+                    <p>백지에서 시작하면 막막합니다. PSST 기획 캔버스는 질문에 답하는 방식으로 자연스럽게 기획안을 완성하게 해줍니다.</p>
+                    <p><strong>BM Canvas와 다른 점:</strong></p>
+                    <ul style="margin-left: 1.2rem; margin-top: 0.5rem; color: rgba(255,255,255,0.8);">
+                        <li>비즈니스 모델이 아닌 <span class="highlight">단일 기획안</span>에 특화</li>
+                        <li>9개 블록이 아닌 <span class="highlight">4개 핵심 영역</span>으로 간결</li>
+                        <li>창업이 아닌 <span class="highlight">모든 업무 제안</span>에 활용</li>
+                    </ul>
+                </div>
+                <div class="worksheet-preview">
+                    <div class="worksheet-title">PSST 기획 캔버스</div>
+                    <div class="worksheet-subtitle">Problem - Solution - Strategy - Timeline</div>
+                    <div class="worksheet-grid">
+                        <div class="worksheet-cell p">
+                            <div class="worksheet-cell-title"><span>P</span> 문제 정의</div>
+                            <div class="worksheet-lines"></div>
+                            <div class="worksheet-lines"></div>
+                        </div>
+                        <div class="worksheet-cell s1">
+                            <div class="worksheet-cell-title"><span>S</span> 해결책</div>
+                            <div class="worksheet-lines"></div>
+                            <div class="worksheet-lines"></div>
+                        </div>
+                        <div class="worksheet-cell s2">
+                            <div class="worksheet-cell-title"><span>S</span> 실행 전략</div>
+                            <div class="worksheet-lines"></div>
+                            <div class="worksheet-lines"></div>
+                        </div>
+                        <div class="worksheet-cell t">
+                            <div class="worksheet-cell-title"><span>T</span> 타임라인</div>
+                            <div class="worksheet-lines"></div>
+                            <div class="worksheet-lines"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 14: Worksheet Example 1 -->
+    <section class="slide" id="worksheet-ex1">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Worksheet Example 01</div>
+                <h2 class="section-title">대학 동아리 홍보 기획</h2>
+                <p class="section-subtitle">신입생 동아리 가입률 50% 향상을 위한 SNS 홍보 전략</p>
+            </div>
+
+            <div class="worksheet-preview" style="color: #1a1a2e;">
+                <div style="text-align: left; margin-bottom: 1rem;">
+                    <strong>한 줄 요약:</strong> 인스타그램 릴스와 에브리타임을 활용한 2주 집중 홍보로 동아리 설명회 참석률을 높인다
+                </div>
+                <div class="worksheet-grid">
+                    <div class="worksheet-cell p" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>P</span> 문제 정의</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>현황:</strong> 작년 설명회 참석 23명, 가입 8명(35%)<br>
+                            <strong>문제:</strong> 최소 15명 가입 필요, 현재 추세로는 운영 어려움<br>
+                            <strong>근거:</strong> 신입생 62%가 동아리 존재 자체를 모름
+                        </p>
+                    </div>
+                    <div class="worksheet-cell s1" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>S</span> 해결책</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>제안:</strong> 인스타 릴스 + 에브리타임 홍보글 강화<br>
+                            <strong>이유:</strong> 신입생 92%가 에브리타임 사용, 78%가 릴스 시청<br>
+                            <strong>기대:</strong> 설명회 35명, 가입 15명 (전환율 43%)
+                        </p>
+                    </div>
+                    <div class="worksheet-cell s2" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>S</span> 실행 전략</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>과제:</strong> 1. 릴스 5개 제작 2. 에브리타임 홍보글 3회 3. 사전 신청 폼<br>
+                            <strong>자원:</strong> 스마트폰, 캡컷(무료), 간식비 3만원<br>
+                            <strong>리스크:</strong> 조회수 저조 시 학과 단톡방 추가 홍보
+                        </p>
+                    </div>
+                    <div class="worksheet-cell t" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>T</span> 타임라인</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>1단계:</strong> 콘텐츠 기획 및 촬영 (D-14)<br>
+                            <strong>2단계:</strong> 릴스 편집 및 1차 업로드 (D-10)<br>
+                            <strong>3단계:</strong> 에브리타임 집중 홍보 (D-7~D-1)<br>
+                            <strong>완료일:</strong> 3월 2일 (설명회 당일)
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(243, 156, 18, 0.1); border-radius: 8px; text-align: left;">
+                    <strong>성공 지표:</strong> 설명회 참석 35명, 실제 가입 15명, 릴스 총 조회수 5,000회
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 15: Worksheet Example 2 -->
+    <section class="slide" id="worksheet-ex2">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Worksheet Example 02</div>
+                <h2 class="section-title">무인 스터디카페 창업 기획</h2>
+                <p class="section-subtitle">대학가 무인 스터디카페 창업으로 월 순이익 300만원 달성하기</p>
+            </div>
+
+            <div class="worksheet-preview" style="color: #1a1a2e;">
+                <div style="text-align: left; margin-bottom: 1rem;">
+                    <strong>한 줄 요약:</strong> 24시간 무인 운영 시스템으로 인건비를 절감하고 대학생 수요에 맞춘 합리적 가격으로 차별화한다
+                </div>
+                <div class="worksheet-grid">
+                    <div class="worksheet-cell p" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>P</span> 문제 정의</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>현황:</strong> A대학 정문 앞 스터디카페 2곳, 시간당 2,500원<br>
+                            <strong>문제:</strong> 도서관 마감(22시) 이후 학습 공간 부족<br>
+                            <strong>근거:</strong> 에브리타임 설문 127명 중 83%가 24시간 공간 필요
+                        </p>
+                    </div>
+                    <div class="worksheet-cell s1" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>S</span> 해결책</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>제안:</strong> 시간당 1,500원, 24시간 무인 운영 (30석)<br>
+                            <strong>이유:</strong> 무인 시스템으로 인건비 0원, 저렴한 가격<br>
+                            <strong>기대:</strong> 월 매출 650만원, 순이익 300만원
+                        </p>
+                    </div>
+                    <div class="worksheet-cell s2" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>S</span> 실행 전략</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>과제:</strong> 1. 상가 임대 계약 2. 무인 시스템 구축 3. 오픈 프로모션<br>
+                            <strong>예산:</strong> 4,500만원 (보증금 1,500 + 인테리어 2,000 + 시스템 1,000)<br>
+                            <strong>리스크:</strong> 방학 매출 하락 → 고시생 타겟 마케팅
+                        </p>
+                    </div>
+                    <div class="worksheet-cell t" style="min-height: auto; padding: 1rem;">
+                        <div class="worksheet-cell-title"><span>T</span> 타임라인</div>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #333;">
+                            <strong>1단계:</strong> 상권 분석 및 임대 계약 (1월)<br>
+                            <strong>2단계:</strong> 인테리어 및 시스템 구축 (2월)<br>
+                            <strong>3단계:</strong> 시범 운영 및 정식 오픈 (3월 1일)<br>
+                            <strong>손익분기점:</strong> 4개월차
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(243, 156, 18, 0.1); border-radius: 8px; text-align: left;">
+                    <strong>성공 지표:</strong> 월 이용자 800명, 좌석 가동률 60%, 네이버 평점 4.5 이상
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 16: Activity -->
+    <section class="slide" id="activity">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Part 06</div>
+                <h2 class="section-title">실습 시간</h2>
+                <p class="section-subtitle">이제 여러분의 기획안을 작성해 보세요!</p>
+            </div>
+
+            <div class="activity-box">
+                <div class="activity-icon">✍️</div>
+                <h3 class="activity-title">PSST 캔버스 작성하기</h3>
+                <p class="activity-desc">
+                    배부된 워크시트에 본인만의 기획안을 작성해 보세요.<br>
+                    주제는 자유입니다. 취업 준비, 동아리 활동, 창업 아이디어 등 무엇이든 좋습니다!
+                </p>
+
+                <div class="activity-steps">
+                    <div class="activity-step">
+                        <div class="activity-step-num">1</div>
+                        <p style="font-weight: 600;">주제 선정</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">해결하고 싶은 문제를 떠올려 보세요</p>
+                    </div>
+                    <div class="activity-step">
+                        <div class="activity-step-num">2</div>
+                        <p style="font-weight: 600;">한 줄 요약</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">핵심을 한 문장으로 정리</p>
+                    </div>
+                    <div class="activity-step">
+                        <div class="activity-step-num">3</div>
+                        <p style="font-weight: 600;">PSST 채우기</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">4개 영역을 순서대로</p>
+                    </div>
+                    <div class="activity-step">
+                        <div class="activity-step-num">4</div>
+                        <p style="font-weight: 600;">성공 지표</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">측정 가능한 목표 설정</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 2rem;">
+                <p class="quote-text">💡 <strong>Tip:</strong> 정답은 없습니다! 중요한 것은 논리적인 흐름입니다. P→S→S→T 순서로 이어지는 스토리를 만들어 보세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Summary -->
+    <section class="slide" id="summary">
+        <div class="slide-content">
+            <div class="section-header">
+                <div class="section-number">Summary</div>
+                <h2 class="section-title">오늘 배운 핵심 정리</h2>
+            </div>
+
+            <div class="key-points">
+                <div class="key-point">
+                    <div class="key-point-icon">🎯</div>
+                    <h4 class="key-point-title">기획안의 본질</h4>
+                    <p class="key-point-desc">기획안은 <strong>문제 해결 제안서</strong>입니다. 의사결정자를 설득하는 논리적 문서입니다.</p>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-icon">🔧</div>
+                    <h4 class="key-point-title">PSST 프레임워크</h4>
+                    <p class="key-point-desc"><strong>Problem → Solution → Strategy → Timeline</strong> 순서로 기획의 논리를 구성하세요.</p>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-icon">📊</div>
+                    <h4 class="key-point-title">데이터 기반</h4>
+                    <p class="key-point-desc">모든 주장에는 <strong>숫자와 출처</strong>를 붙이세요. 설득력이 3배 높아집니다.</p>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-icon">✅</div>
+                    <h4 class="key-point-title">측정 가능한 목표</h4>
+                    <p class="key-point-desc"><strong>SMART 원칙</strong>으로 구체적이고 측정 가능한 KPI를 설정하세요.</p>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-icon">⚠️</div>
+                    <h4 class="key-point-title">실수 방지</h4>
+                    <p class="key-point-desc">문제 정의 없는 제안, 근거 없는 주장, 실행 계획 부재를 <strong>반드시 피하세요.</strong></p>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-icon">📝</div>
+                    <h4 class="key-point-title">캔버스 활용</h4>
+                    <p class="key-point-desc"><strong>PSST 기획 캔버스</strong>로 아이디어를 체계적으로 정리하세요.</p>
+                </div>
+            </div>
+
+            <div class="flow-diagram" style="margin-top: 2rem;">
+                <div class="flow-item p">P</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item s1">S</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item s2">S</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-item t">T</div>
+                <span class="flow-arrow">=</span>
+                <div style="background: var(--gradient-2); padding: 1rem 2rem; border-radius: 12px; font-weight: 800; font-size: 1.2rem;">
+                    설득력 있는 기획안!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 18: End -->
+    <section class="slide end-slide" id="end">
+        <div class="slide-content" style="position: relative; z-index: 1;">
+            <h2 class="end-title">이제 여러분도<br><span style="background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">프로 일잘러</span>입니다!</h2>
+            <p class="end-message">
+                오늘 배운 PSST 프레임워크를 실제 업무와 취업 준비에 활용해 보세요.<br>
+                좋은 기획안 하나가 여러분의 커리어를 바꿀 수 있습니다.
+            </p>
+            
+            <div class="stat-grid" style="max-width: 600px; margin: 2rem auto;">
+                <div class="stat-box">
+                    <div class="stat-number">PSST</div>
+                    <div class="stat-label">기억하세요</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1장</div>
+                    <div class="stat-label">캔버스로 정리</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">반복 연습</div>
+                </div>
+            </div>
+
+            <p style="font-size: 1.5rem; margin-top: 3rem;">감사합니다! 🙌</p>
+            <p style="color: rgba(255,255,255,0.5); margin-top: 1rem;">질문이 있으시면 편하게 말씀해 주세요.</p>
+        </div>
+    </section>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Active nav link
+        const sections = document.querySelectorAll('.slide');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const indicatorDots = document.querySelectorAll('.indicator-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            indicatorDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-slide') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        // Indicator dot click
+        indicatorDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const slideId = dot.getAttribute('data-slide');
+                document.getElementById(slideId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const currentSection = [...sections].find(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top >= -100 && rect.top < window.innerHeight / 2;
+            });
+
+            if (!currentSection) return;
+
+            const currentIndex = [...sections].indexOf(currentSection);
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                if (currentIndex < sections.length - 1) {
+                    sections[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentIndex > 0) {
+                    sections[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
